@@ -36,23 +36,7 @@ def process_file(input_file, output_file=None):
         base = os.path.splitext(input_file)[0]
         output_file = f"{base}.cpp"
     
-    try:
-        # Read input file
-        with open(input_file, 'r') as f:
-            c_code = f.read()
-        
-        # Convert to C++
-        cpp_code = transpile_code(c_code)
-        
-        # Write output file
-        with open(output_file, 'w') as f:
-            f.write(cpp_code)
-        
-        print(f"Successfully transpiled {input_file} to {output_file}")
-        return True
-    except Exception as e:
-        print(f"Error during transpilation: {str(e)}")
-        return False
+    
 
 def main():
     """
@@ -77,24 +61,7 @@ def quick_transpile(input_file, output_file=None):
         base = os.path.splitext(input_file)[0]
         output_file = f"{base}.cpp"
     
-    try:
-        # Read input file
-        with open(input_file, 'r') as f:
-            c_code = f.read()
-        
-        # Use only transformer for direct text manipulation
-        transformer = CppTransformer(None)
-        cpp_code = transformer.quick_transform(c_code)
-        
-        # Write output file
-        with open(output_file, 'w') as f:
-            f.write(cpp_code)
-        
-        print(f"Successfully quick-transpiled {input_file} to {output_file}")
-        return True
-    except Exception as e:
-        print(f"Error during quick transpilation: {str(e)}")
-        return False
+    
 
 if __name__ == "__main__":
     # For now, we'll use the quick transpile method, 
