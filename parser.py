@@ -6,7 +6,6 @@ def create_program():
         'functions': []
     }
 
-
 def create_include(header):
     return {
         'type': 'Include',
