@@ -3,10 +3,7 @@ import re
 class CppTransformer:
     
 
-    def __init__(self):
-       
-        pass
-
+    
     def transform(self, code: str) -> str:
         if not code or not isinstance(code, str):
             raise ValueError("Input code must be a non-empty string")
@@ -84,6 +81,18 @@ class CppTransformer:
         )
 
        
+        code = re.sub(
+            r'for\s*\(\s*(\w+)\s*=\s*([^;]+);\s*([^;]+);\s*([^)]+)\)',
+            r'for (\1 = \2; \3; \4)',
+            code
+        )
+
+        
+        code = re.sub(r'while\s*\(', 'while (', code)
+
+
+
+       
         code = re.sub(r'\n{3,}', '\n\n', code)
 
        
@@ -92,9 +101,7 @@ class CppTransformer:
         return code
 
     def _replace_scanf(self, match):
-        """
-        Helper to convert scanf with multiple arguments into cin statements
-        """
+        
         format_str = match.group(1)
         vars_str = match.group(2)
         vars_list = [v.strip().lstrip('&') for v in vars_str.split(',')]
